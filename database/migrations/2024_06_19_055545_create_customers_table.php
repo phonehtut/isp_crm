@@ -13,16 +13,24 @@ return new class extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
             $table->string('customer_id')->nullable();
-            $table->unsignedBigInteger('name');
-            $table->foreign('name')->references('id')->on('new_orders')->onDelete('cascade');
-            $table->string('township')->nullable();
             $table->date('register_date')->nullable();
-            $table->unsignedBigInteger('fat_id')->nullable();
-            $table->foreign('fat_id')->references('id')->on('fat_boxes')->onDelete('cascade');
-            $table->unsignedBigInteger('port_id')->nullable();
-            $table->foreign('port_id')->references('id')->on('ports')->onDelete('cascade');
             $table->string('sn')->unique()->nullable();
+            $table->string('email')->unique()->nullable();
+            $table->string('phone');
+            $table->longText('address');
+            $table->string('nrc_front')->nullable();
+            $table->string('nrc_back')->nullable();
+            $table->string('lat_long')->nullable();
+            $table->enum('status', ["0","1"])->default('0')->comment('0: pending , 1: finish');
+            $table->string('start_cable')->nullable();
+            $table->string('end_cable')->nullable();
+            $table->string('total_cable')->nullable();
+            $table->string('fat_optical')->nullable();
+            $table->string('cus_res_optical')->nullable();
+            $table->string('onu_optical')->nullable();
+            $table->string('create_user')->nullable();
             $table->timestamps();
         });
     }

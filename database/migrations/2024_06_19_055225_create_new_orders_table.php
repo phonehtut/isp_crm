@@ -19,10 +19,14 @@ return new class extends Migration
             $table->longText('address');
             $table->string('nrc_front')->nullable();
             $table->string('nrc_back')->nullable();
-            $table->unsignedBigInteger('plan_id');
-            $table->foreign('plan_id')->references('id')->on('plans')->onDelete('cascade');
             $table->string('lat_long')->nullable();
             $table->enum('status', ["0","1"])->default('0')->comment('0: pending , 1: finish');
+            $table->string('start_cable')->nullable();
+            $table->string('end_cable')->nullable();
+            $table->string('total_cable')->nullable();
+            $table->string('fat_optical')->nullable();
+            $table->string('cus_res_optical')->nullable();
+            $table->string('onu_optical')->nullable();
             $table->string('create_user')->nullable();
             $table->timestamps();
         });

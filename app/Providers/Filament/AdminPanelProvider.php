@@ -56,6 +56,7 @@ class AdminPanelProvider extends PanelProvider
                 'white' => Color::Slate,
             ])
             ->topNavigation()
+            ->sidebarCollapsibleOnDesktop()
             ->userMenuItems([
                 'profile' => MenuItem::make()
                     ->label(fn() => auth()->user()->name)

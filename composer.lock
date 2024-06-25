@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "53f035de69c21afaec0c6e75bd539bd9",
+    "content-hash": "d1756bd59f4410a7eca0ea05bb419dfe",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -1338,61 +1338,6 @@
                 }
             ],
             "time": "2024-02-05T11:56:58+00:00"
-        },
-        {
-            "name": "doctrine/sql-formatter",
-            "version": "1.4.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/doctrine/sql-formatter.git",
-                "reference": "d1ac84aef745c69ea034929eb6d65a6908b675cc"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/sql-formatter/zipball/d1ac84aef745c69ea034929eb6d65a6908b675cc",
-                "reference": "d1ac84aef745c69ea034929eb6d65a6908b675cc",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^8.1"
-            },
-            "require-dev": {
-                "doctrine/coding-standard": "^12",
-                "phpstan/phpstan": "^1.10",
-                "phpunit/phpunit": "^10.5",
-                "vimeo/psalm": "^5.24"
-            },
-            "bin": [
-                "bin/sql-formatter"
-            ],
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Doctrine\\SqlFormatter\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jeremy Dorn",
-                    "email": "jeremy@jeremydorn.com",
-                    "homepage": "https://jeremydorn.com/"
-                }
-            ],
-            "description": "a PHP SQL highlighting library",
-            "homepage": "https://github.com/doctrine/sql-formatter/",
-            "keywords": [
-                "highlight",
-                "sql"
-            ],
-            "support": {
-                "issues": "https://github.com/doctrine/sql-formatter/issues",
-                "source": "https://github.com/doctrine/sql-formatter/tree/1.4.0"
-            },
-            "time": "2024-05-08T08:12:09+00:00"
         },
         {
             "name": "dragonmantank/cron-expression",
@@ -2907,16 +2852,16 @@
         },
         {
             "name": "joaopaulolndev/filament-edit-profile",
-            "version": "v1.0.15",
+            "version": "v1.0.16",
             "source": {
                 "type": "git",
                 "url": "https://github.com/joaopaulolndev/filament-edit-profile.git",
-                "reference": "3cab0df39db47007090aae6e39eba124cb6bc35f"
+                "reference": "e782009c47d44437f8bc0a0c84721ee78c2d2a23"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/joaopaulolndev/filament-edit-profile/zipball/3cab0df39db47007090aae6e39eba124cb6bc35f",
-                "reference": "3cab0df39db47007090aae6e39eba124cb6bc35f",
+                "url": "https://api.github.com/repos/joaopaulolndev/filament-edit-profile/zipball/e782009c47d44437f8bc0a0c84721ee78c2d2a23",
+                "reference": "e782009c47d44437f8bc0a0c84721ee78c2d2a23",
                 "shasum": ""
             },
             "require": {
@@ -2979,7 +2924,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-06-19T16:14:57+00:00"
+            "time": "2024-06-23T15:48:56+00:00"
         },
         {
             "name": "josespinal/filament-record-navigation",
@@ -3376,93 +3321,6 @@
                 "source": "https://github.com/laravel/prompts/tree/v0.1.24"
             },
             "time": "2024-06-17T13:58:22+00:00"
-        },
-        {
-            "name": "laravel/pulse",
-            "version": "v1.2.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laravel/pulse.git",
-                "reference": "7e32ed4c4a2293d2792a99b55f5284d642f41339"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laravel/pulse/zipball/7e32ed4c4a2293d2792a99b55f5284d642f41339",
-                "reference": "7e32ed4c4a2293d2792a99b55f5284d642f41339",
-                "shasum": ""
-            },
-            "require": {
-                "doctrine/sql-formatter": "^1.2",
-                "guzzlehttp/promises": "^1.0|^2.0",
-                "illuminate/auth": "^10.48.4|^11.0.8",
-                "illuminate/cache": "^10.48.4|^11.0.8",
-                "illuminate/config": "^10.48.4|^11.0.8",
-                "illuminate/console": "^10.48.4|^11.0.8",
-                "illuminate/contracts": "^10.48.4|^11.0.8",
-                "illuminate/database": "^10.48.4|^11.0.8",
-                "illuminate/events": "^10.48.4|^11.0.8",
-                "illuminate/http": "^10.48.4|^11.0.8",
-                "illuminate/queue": "^10.48.4|^11.0.8",
-                "illuminate/redis": "^10.48.4|^11.0.8",
-                "illuminate/routing": "^10.48.4|^11.0.8",
-                "illuminate/support": "^10.48.4|^11.0.8",
-                "illuminate/view": "^10.48.4|^11.0.8",
-                "livewire/livewire": "^3.4.9",
-                "nesbot/carbon": "^2.67|^3.0",
-                "php": "^8.1",
-                "symfony/console": "^6.0|^7.0"
-            },
-            "conflict": {
-                "nunomaduro/collision": "<7.7.0"
-            },
-            "require-dev": {
-                "guzzlehttp/guzzle": "^7.7",
-                "mockery/mockery": "^1.0",
-                "orchestra/testbench": "^8.23.1|^9.0",
-                "pestphp/pest": "^2.0",
-                "pestphp/pest-plugin-laravel": "^2.2",
-                "phpstan/phpstan": "^1.11",
-                "predis/predis": "^1.0|^2.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.x-dev"
-                },
-                "laravel": {
-                    "providers": [
-                        "Laravel\\Pulse\\PulseServiceProvider"
-                    ],
-                    "aliases": {
-                        "Pulse": "Laravel\\Pulse\\Facades\\Pulse"
-                    }
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Laravel\\Pulse\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Taylor Otwell",
-                    "email": "taylor@laravel.com"
-                }
-            ],
-            "description": "Laravel Pulse is a real-time application performance monitoring tool and dashboard for your Laravel application.",
-            "homepage": "https://github.com/laravel/pulse",
-            "keywords": [
-                "laravel"
-            ],
-            "support": {
-                "issues": "https://github.com/laravel/pulse/issues",
-                "source": "https://github.com/laravel/pulse"
-            },
-            "time": "2024-06-04T13:30:30+00:00"
         },
         {
             "name": "laravel/sanctum",
@@ -4603,6 +4461,73 @@
                 }
             ],
             "time": "2023-06-21T14:59:35+00:00"
+        },
+        {
+            "name": "malzariey/filament-daterangepicker-filter",
+            "version": "2.7.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/malzariey/filament-daterangepicker-filter.git",
+                "reference": "37dca49a04593be4df207107fe62131a02954d8a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/malzariey/filament-daterangepicker-filter/zipball/37dca49a04593be4df207107fe62131a02954d8a",
+                "reference": "37dca49a04593be4df207107fe62131a02954d8a",
+                "shasum": ""
+            },
+            "require": {
+                "filament/filament": "^2.0|^3.0",
+                "illuminate/contracts": "^8.0|^9.0|^10.0|^11.0",
+                "php": "^8.0",
+                "spatie/laravel-package-tools": "^1.16.4"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Malzariey\\FilamentDaterangepickerFilter\\FilamentDaterangepickerFilterServiceProvider"
+                    ],
+                    "aliases": {
+                        "FilamentDaterangepickerFilter": "Malzariey\\FilamentDaterangepickerFilter\\Facades\\FilamentDaterangepickerFilter"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Malzariey\\FilamentDaterangepickerFilter\\": "src",
+                    "Malzariey\\FilamentDaterangepickerFilter\\Database\\Factories\\": "database/factories"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Majid Al-Zariey",
+                    "email": "malzariey@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "This package uses daterangepciker library to filter date by a range or predefined date ranges (Today , Yesterday ...etc)",
+            "homepage": "https://github.com/malzariey/filament-daterangepicker-filter",
+            "keywords": [
+                "Malzariey",
+                "filament-daterangepicker-filter",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/malzariey/filament-daterangepicker-filter/issues",
+                "source": "https://github.com/malzariey/filament-daterangepicker-filter/tree/2.7.3"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/Malzariey",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-06-07T06:30:43+00:00"
         },
         {
             "name": "markbaker/complex",
@@ -6385,120 +6310,6 @@
             "time": "2019-03-08T08:55:37+00:00"
         },
         {
-            "name": "ralphjsmit/laravel-filament-pulse",
-            "version": "0.5.1",
-            "source": {
-                "type": "git",
-                "url": "git@github.com:ralphjsmit/laravel-filament-pulse.git",
-                "reference": "6ab9b832335166ab6ec15a7dcfe9b79d184db86b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://satis.ralphjsmit.com/dist/ralphjsmit/laravel-filament-pulse/ralphjsmit-laravel-filament-pulse-6ab9b832335166ab6ec15a7dcfe9b79d184db86b-zip-a2c214.zip",
-                "reference": "6ab9b832335166ab6ec15a7dcfe9b79d184db86b",
-                "shasum": "7c458ec6154c830bca8794374809a619dd11ec18"
-            },
-            "require": {
-                "filament/filament": "^3.2",
-                "illuminate/contracts": "^10.0|^11.0",
-                "laravel/pulse": "^1.0@beta",
-                "php": "^8.1",
-                "ralphjsmit/packages": "^1.3",
-                "spatie/laravel-package-tools": "^1.14.0"
-            },
-            "require-dev": {
-                "laravel/pint": "^1.0",
-                "nunomaduro/collision": "^7.8|^8.0",
-                "spatie/laravel-ray": "^1.26"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "RalphJSmit\\Filament\\Pulse\\FilamentPulseServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "RalphJSmit\\Filament\\Pulse\\": "src/"
-                }
-            },
-            "scripts": {
-                "format": [
-                    "vendor/bin/pint"
-                ]
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Ralph J. Smit",
-                    "email": "rjs@ralphjsmit.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Filament x Laravel Pulse",
-            "homepage": "https://github.com/ralphjsmit/laravel-filament-pulse",
-            "keywords": [
-                "Ralph J. Smit",
-                "laravel",
-                "laravel-filament-pulse"
-            ],
-            "support": {
-                "source": "https://github.com/ralphjsmit/laravel-filament-pulse/tree/0.5.1",
-                "issues": "https://github.com/ralphjsmit/laravel-filament-pulse/issues"
-            },
-            "time": "2024-04-20T10:13:55+00:00"
-        },
-        {
-            "name": "ralphjsmit/packages",
-            "version": "1.4.2",
-            "source": {
-                "type": "git",
-                "url": "git@github.com:ralphjsmit/packages.git",
-                "reference": "69650da1603c282ee71bfac969293e3faca36e3f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://satis.ralphjsmit.com/dist/ralphjsmit/packages/ralphjsmit-packages-69650da1603c282ee71bfac969293e3faca36e3f-zip-06dcad.zip",
-                "reference": "69650da1603c282ee71bfac969293e3faca36e3f",
-                "shasum": "a1e35fea977f8e1bbfc6ac0d82ece7268aa11b10"
-            },
-            "require": {
-                "composer-plugin-api": "^2.0",
-                "php": "^8.0",
-                "spatie/url": "^2.4"
-            },
-            "require-dev": {
-                "composer/composer": "^2.0",
-                "mockery/mockery": "^1.6",
-                "pestphp/pest": "^2.30",
-                "spatie/ray": "^1.40"
-            },
-            "type": "composer-plugin",
-            "extra": {
-                "class": "RalphJSmit\\Packages\\Plugin",
-                "plugin-modifies-downloads": true
-            },
-            "autoload": {
-                "psr-4": {
-                    "RalphJSmit\\Packages\\": "src/"
-                }
-            },
-            "scripts": {
-                "test": [
-                    "vendor/bin/pest"
-                ]
-            },
-            "support": {
-                "source": "https://github.com/ralphjsmit/packages/tree/1.4.2",
-                "issues": "https://github.com/ralphjsmit/packages/issues"
-            },
-            "time": "2024-06-05T09:41:46+00:00"
-        },
-        {
             "name": "ramsey/collection",
             "version": "2.0.0",
             "source": {
@@ -7019,16 +6830,16 @@
         },
         {
             "name": "spatie/laravel-permission",
-            "version": "6.8.0",
+            "version": "6.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-permission.git",
-                "reference": "5147997e92001bf6cc5cd207eac554bc8f16c02a"
+                "reference": "fe973a58b44380d0e8620107259b7bda22f70408"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-permission/zipball/5147997e92001bf6cc5cd207eac554bc8f16c02a",
-                "reference": "5147997e92001bf6cc5cd207eac554bc8f16c02a",
+                "url": "https://api.github.com/repos/spatie/laravel-permission/zipball/fe973a58b44380d0e8620107259b7bda22f70408",
+                "reference": "fe973a58b44380d0e8620107259b7bda22f70408",
                 "shasum": ""
             },
             "require": {
@@ -7089,7 +6900,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-permission/issues",
-                "source": "https://github.com/spatie/laravel-permission/tree/6.8.0"
+                "source": "https://github.com/spatie/laravel-permission/tree/6.9.0"
             },
             "funding": [
                 {
@@ -7097,7 +6908,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-06-21T23:50:10+00:00"
+            "time": "2024-06-22T23:04:52+00:00"
         },
         {
             "name": "spatie/laravel-query-builder",
@@ -7171,118 +6982,6 @@
                 }
             ],
             "time": "2024-05-10T08:19:35+00:00"
-        },
-        {
-            "name": "spatie/macroable",
-            "version": "2.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/spatie/macroable.git",
-                "reference": "ec2c320f932e730607aff8052c44183cf3ecb072"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/spatie/macroable/zipball/ec2c320f932e730607aff8052c44183cf3ecb072",
-                "reference": "ec2c320f932e730607aff8052c44183cf3ecb072",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^8.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^8.0|^9.3"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Spatie\\Macroable\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Freek Van der Herten",
-                    "email": "freek@spatie.be",
-                    "homepage": "https://spatie.be",
-                    "role": "Developer"
-                }
-            ],
-            "description": "A trait to dynamically add methods to a class",
-            "homepage": "https://github.com/spatie/macroable",
-            "keywords": [
-                "macroable",
-                "spatie"
-            ],
-            "support": {
-                "issues": "https://github.com/spatie/macroable/issues",
-                "source": "https://github.com/spatie/macroable/tree/2.0.0"
-            },
-            "time": "2021-03-26T22:39:02+00:00"
-        },
-        {
-            "name": "spatie/url",
-            "version": "2.4.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/spatie/url.git",
-                "reference": "93a51db743cdec22b081c64593e193887c9cd395"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/spatie/url/zipball/93a51db743cdec22b081c64593e193887c9cd395",
-                "reference": "93a51db743cdec22b081c64593e193887c9cd395",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^8.0",
-                "psr/http-message": "^1.0 || ^2.0",
-                "spatie/macroable": "^1.0 || ^2.0"
-            },
-            "require-dev": {
-                "pestphp/pest": "^1.21"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Spatie\\Url\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Sebastian De Deyne",
-                    "email": "sebastian@spatie.be",
-                    "homepage": "https://spatie.be",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Parse, build and manipulate URL's",
-            "homepage": "https://github.com/spatie/url",
-            "keywords": [
-                "spatie",
-                "url"
-            ],
-            "support": {
-                "issues": "https://github.com/spatie/url/issues",
-                "source": "https://github.com/spatie/url/tree/2.4.0"
-            },
-            "funding": [
-                {
-                    "url": "https://spatie.be/open-source/support-us",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/spatie",
-                    "type": "github"
-                }
-            ],
-            "time": "2024-03-08T11:35:19+00:00"
         },
         {
             "name": "symfony/clock",

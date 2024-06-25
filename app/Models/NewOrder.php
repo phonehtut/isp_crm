@@ -20,6 +20,16 @@ class NewOrder extends Model
         'plan_id',
         'lat_long',
         'status',
+        'start_cable',
+        'end_cable',
+        'total_cable',
+        'fat_optical',
+        'cus_res_optical',
+        'onu_optical',
+        'township_id',
+        'plan_id',
+        'fat_id',
+        'port_id',
         'create_user',
     ];
 

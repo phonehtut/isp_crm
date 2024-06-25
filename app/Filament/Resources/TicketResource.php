@@ -42,6 +42,10 @@ class TicketResource extends Resource
                             ->relationship('customer', 'customer_id')
                             ->searchable()
                             ->preload(),
+                        Select::make('new_order_id')
+                            ->relationship('newOrder','name')
+                            ->searchable()
+                            ->preload(),
                         Select::make('type_id')
                             ->relationship('type', 'name')
                             ->searchable()
@@ -100,21 +104,21 @@ class TicketResource extends Resource
                     ->label('Customer ID')
                     ->searchable()
                     ->sortable(),
-                TextColumn::make('customer.newOrder.phone')
+                TextColumn::make('newOrder.phone')
                     ->label('Phone Number')
                     ->searchable()
                     ->sortable(),
-                TextColumn::make('customer.newOrder.address')
+                TextColumn::make('newOrder.address')
                     ->label('Address')
                     ->html()
                     ->limit(50),
-                TextColumn::make('customer.newOrder.lat_long')
+                TextColumn::make('newOrder.lat_long')
                     ->label('Lat/Long')
                     ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('customer.fat.name')
+                TextColumn::make('newOrder.fat.name')
                     ->searchable()
                     ->sortable(),
-                TextColumn::make('customer.port.name')
+                TextColumn::make('newOrder.port.name')
                     ->searchable()
                     ->sortable()
             ])

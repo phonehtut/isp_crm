@@ -18,10 +18,10 @@
         "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9",
         "leandrocfe/filament-apex-charts": "^3.1",
+        "malzariey/filament-daterangepicker-filter": "^2.7",
         "owenvoke/blade-fontawesome": "^2.6",
         "parallax/filament-comments": "^1.3",
         "pxlrbt/filament-excel": "^2.3",
-        "ralphjsmit/laravel-filament-pulse": "^0.5",
         "rupadana/filament-api-service": "^3.2",
         "tomatophp/filament-browser": "^1.0"
     },
@@ -79,11 +79,5 @@
         }
     },
     "minimum-stability": "stable",
-    "prefer-stable": true,
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://satis.ralphjsmit.com"
-        }
-    ]
+    "prefer-stable": true
 }

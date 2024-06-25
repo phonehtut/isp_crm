@@ -13,17 +13,28 @@ class Customer extends Model
     protected $fillable = [
         'customer_id',
         'name',
-        'township',
         'register_date',
-        'fatname',
-        'port_id',
         'sn',
+        'email',
+        'phone',
+        'address',
+        'nrc_front',
+        'nrc_back',
+        'plan_id',
+        'lat_long',
+        'status',
+        'start_cable',
+        'end_cable',
+        'total_cable',
+        'fat_optical',
+        'cus_res_optical',
+        'onu_optical',
+        'township_id',
+        'plan_id',
+        'fat_id',
+        'port_id',
+        'create_user',
     ];
-
-    public function newOrder(): BelongsTo
-    {
-        return $this->belongsTo(NewOrder::class, 'name');
-    }
 
     public function port(): BelongsTo
     {
@@ -33,5 +44,15 @@ class Customer extends Model
     public function fat(): BelongsTo
     {
         return $this->belongsTo(FatBox::class, 'fat_id');
+    }
+
+    public function plan(): BelongsTo
+    {
+        return $this->belongsTo(Plan::class, 'plan_id');
+    }
+
+    public function township(): BelongsTo
+    {
+        return $this->belongsTo(Township::class, 'township_id');
     }
 }

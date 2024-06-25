@@ -27,6 +27,11 @@ class Ticket extends Model
         return $this->belongsTo(Customer::class, 'customer_id');
     }
 
+    public function newOrder(): BelongsTo
+    {
+        return $this->belongsTo(NewOrder::class, 'new_order_id');
+    }
+
     public function type(): BelongsTo
     {
         return $this->belongsTo(Type::class, 'type_id');
