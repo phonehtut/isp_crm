@@ -12,15 +12,18 @@ use Filament\Support\Colors\Color;
 use Hasnayeen\Themes\ThemesPlugin;
 use App\Filament\Clusters\Settings;
 use App\Providers\MyVersionProvider;
+use Filament\Support\Enums\MaxWidth;
 use Filament\Navigation\NavigationGroup;
 use Rupadana\ApiService\ApiServicePlugin;
 use Filament\Http\Middleware\Authenticate;
 use Awcodes\FilamentVersions\VersionsPlugin;
 use Awcodes\FilamentVersions\VersionsWidget;
 use Hasnayeen\Themes\Http\Middleware\SetTheme;
+use App\Filament\Resources\MaintenanceResource;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Awcodes\FilamentQuickCreate\QuickCreatePlugin;
+use Filament\Billing\Providers\SparkBillingProvider;
 use TomatoPHP\FilamentBrowser\FilamentBrowserPlugin;
 use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 use GeoSot\FilamentEnvEditor\FilamentEnvEditorPlugin;
@@ -33,7 +36,10 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Leandrocfe\FilamentApexCharts\FilamentApexChartsPlugin;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Joaopaulolndev\FilamentEditProfile\Pages\EditProfilePage;
+use TomatoPHP\FilamentMediaManager\FilamentMediaManagerPlugin;
+use TomatoPHP\FilamentTranslations\FilamentTranslationsPlugin;
 use Joaopaulolndev\FilamentEditProfile\FilamentEditProfilePlugin;
+use Joaopaulolndev\FilamentCheckSslWidget\FilamentCheckSslWidgetPlugin;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -55,8 +61,12 @@ class AdminPanelProvider extends PanelProvider
                 'gray' => Color::Gray,
                 'white' => Color::Slate,
             ])
-            ->topNavigation()
+            ->maxContentWidth(MaxWidth::Full)
+            ->globalSearch(false)
             ->sidebarCollapsibleOnDesktop()
+            ->spa()
+            ->databaseTransactions()
+            ->tenantBillingProvider(new SparkBillingProvider())
             ->userMenuItems([
                 'profile' => MenuItem::make()
                     ->label(fn() => auth()->user()->name)
@@ -114,7 +124,7 @@ class AdminPanelProvider extends PanelProvider
                     ->navigationIcon('heroicon-o-cog-8-tooth')
                     ->navigationSort(1)
                     ->slug('env-editor'),
-                FilamentShieldPlugin::make()
+                FilamentShieldPlugin::make(),
             ]);
     }
 }

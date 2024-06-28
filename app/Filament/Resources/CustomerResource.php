@@ -57,16 +57,16 @@ class CustomerResource extends Resource
                                     ->hiddenLabel()
                                     ->placeholder('Please Select NRC Front Photo')
                                     ->directory(function (callable $get) {
-                                        $customerName = $get('name');
-                                        return "customers/{$customerName}/nrc/front";
+                                        $customerID = $get('customer_id');
+                                        return "customers/{$customerID}/nrc/front";
                                     })
                                     ->disk('public'),
                                 FileUpload::make('nrc_back')
                                     ->hiddenLabel()
                                     ->placeholder('Please Select NRC Back Photo')
                                     ->directory(function (callable $get) {
-                                        $customerName = $get('name');
-                                        return "customers/{$customerName}/nrc/back";
+                                        $customerID = $get('customer_id');
+                                        return "customers/{$customerID}/nrc/back";
                                     })
                                     ->disk('public'),
                             ])
@@ -102,6 +102,8 @@ class CustomerResource extends Resource
                         Select::make('fat_id')
                             ->relationship('fat', 'name')
                             ->reactive()
+                            ->searchable()
+                            ->preload()
                             ->afterStateUpdated(fn ($state, callable $set) => $set('port_id', null))
                             ->columnSpan(2),
                         Select::make('port_id')
@@ -118,14 +120,37 @@ class CustomerResource extends Resource
                                 })->pluck('name', 'id');
                             })
                             ->required()
+                            ->searchable()
+                            ->preload()
                             ->columnSpan(1),
                         TextInput::make('start_cable')
                             ->label('Cable Start')
-                            ->suffix('meter'),
+                            ->suffix('meter')
+                            ->reactive()
+                            ->afterStateUpdated(function ($state, callable $set, $get) {
+                                $endCable = $get('end_cable');
+                                if (is_numeric($state) && is_numeric($endCable)) {
+                                    $set('total_cable', $state - $endCable);
+                                } else {
+                                    $set('total_cable', 'start cable or end cable is not integer');
+                                }
+                            }),
                         TextInput::make('end_cable')
                             ->label('Cable End')
-                            ->suffix('meter'),
+                            ->suffix('meter')
+                            ->reactive()
+                            ->afterStateUpdated(function ($state, callable $set, $get) {
+                                $startCable = $get('start_cable');
+                                if (is_numeric($state) && is_numeric($startCable)) {
+                                    $set('total_cable', $startCable - $state);
+                                } else {
+                                    $set('total_cable', 'start cable or end cable is not integer');
+                                }
+                            }),
                         TextInput::make('total_cable')
+                            ->label('Total Cable')
+                            ->suffix('meter')
+                            ->readOnly()
                             ->label('Total Cable')
                             ->suffix('meter'),
                         TextInput::make('fat_optical')
@@ -223,6 +248,9 @@ class CustomerResource extends Resource
                     ->label('ONU Optical')
                     ->suffix(' dbm')
                     ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('tickets.id')
+                    ->badge()
+                    ->prefix('TKT')
             ])
             ->filters([
                 SelectFilter::make('plan')
@@ -303,10 +331,5 @@ class CustomerResource extends Resource
             'create' => Pages\CreateCustomer::route('/create'),
             'edit' => Pages\EditCustomer::route('/{record}/edit'),
         ];
-    }
-
-    public static function getNavigationBadge(): ?string
-    {
-        return static::getModel()::count();
     }
 }

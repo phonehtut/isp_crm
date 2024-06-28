@@ -15,6 +15,8 @@ class Ticket extends Model
     protected $fillable = [
         'title',
         'customer_id',
+        'mainten_image',
+        'install_image',
         'type_id',
         'reason',
         'department_id',
@@ -22,14 +24,14 @@ class Ticket extends Model
         'status',
     ];
 
+    protected $casts = [
+        'mainten_image'=> 'array',
+        'install_image' => 'array',
+    ];
+
     public function customer(): BelongsTo
     {
         return $this->belongsTo(Customer::class, 'customer_id');
-    }
-
-    public function newOrder(): BelongsTo
-    {
-        return $this->belongsTo(NewOrder::class, 'new_order_id');
     }
 
     public function type(): BelongsTo

@@ -33,6 +33,7 @@ class UserResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
+            ->deferLoading()
             ->schema([
                 Section::make('Profile')
                     ->schema([

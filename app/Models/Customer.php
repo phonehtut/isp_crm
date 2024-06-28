@@ -55,4 +55,9 @@ class Customer extends Model
     {
         return $this->belongsTo(Township::class, 'township_id');
     }
+
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class, 'customer_id');
+    }
 }

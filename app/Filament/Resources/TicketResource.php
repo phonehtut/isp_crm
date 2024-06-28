@@ -3,8 +3,10 @@
 namespace App\Filament\Resources;
 
 use Filament\Forms;
+use App\Models\Type;
 use Filament\Tables;
 use App\Models\Ticket;
+use App\Models\Customer;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Infolists\Infolist;
@@ -16,9 +18,17 @@ use Filament\Forms\Components\Textarea;
 use Filament\Tables\Columns\TextColumn;
 use App\Filament\Exports\TicketExporter;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\FileUpload;
 use Filament\Tables\Actions\ExportAction;
+use Illuminate\Database\Eloquent\Builder;
+use Filament\Forms\Components\CheckboxList;
 use Filament\Infolists\Components\TextEntry;
+use Filament\Tables\Columns\TextInputColumn;
 use App\Filament\Resources\TicketResource\Pages;
+use Filament\Infolists\Components\Actions\Action;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
+use App\Filament\Resources\TicketResource\RelationManagers;
 use Parallax\FilamentComments\Tables\Actions\CommentsAction;
 
 class TicketResource extends Resource
@@ -42,10 +52,6 @@ class TicketResource extends Resource
                             ->relationship('customer', 'customer_id')
                             ->searchable()
                             ->preload(),
-                        Select::make('new_order_id')
-                            ->relationship('newOrder','name')
-                            ->searchable()
-                            ->preload(),
                         Select::make('type_id')
                             ->relationship('type', 'name')
                             ->searchable()
@@ -58,6 +64,34 @@ class TicketResource extends Resource
                     ])
                     ->columns(2)
                     ->collapsible(),
+                Section::make('Image')
+                    ->schema([
+                        FileUpload::make('mainten_image')
+                            ->label('Maintenance Image')
+                            ->multiple()
+                            ->image()
+                            ->directory(function (callable $get) {
+                                $customer = Customer::find($get('customer_id'));
+                                $customerID = $customer ? $customer->customer_id : null;
+                                $type = Type::find($get('type_id'));
+                                $typeName = $type ? $type->name : null;
+                                $currentDate = now()->format('m-d-Y');
+                                return "customers/{$customerID}/{$currentDate}_Service_{$typeName}/";
+                            })
+                            ->disk('public'),
+                        FileUpload::make('install_image')
+                            ->label('Installation Image')
+                            ->multiple()
+                            ->image()
+                            ->directory(function (callable $get) {
+                                $customer = Customer::find($get('customer_id'));
+                                $customerID = $customer ? $customer->customer_id : null;
+                                $currentDate = now()->format('m-d-Y');
+                                return "customers/{$customerID}/Installation/";
+                            })
+                            ->disk('public'),
+                    ])
+                    ->columns(2),
                 Section::make('Priority & Status')
                     ->schema([
                         Radio::make('priority')
@@ -78,8 +112,8 @@ class TicketResource extends Resource
                     ->schema([
                         Textarea::make('reason')
                             ->hiddenLabel(),
-                    ])
-            ]);
+                     ])
+             ]);
     }
 
     public static function table(Table $table): Table
@@ -104,23 +138,26 @@ class TicketResource extends Resource
                     ->label('Customer ID')
                     ->searchable()
                     ->sortable(),
-                TextColumn::make('newOrder.phone')
+                TextColumn::make('customer.phone')
                     ->label('Phone Number')
                     ->searchable()
                     ->sortable(),
-                TextColumn::make('newOrder.address')
+                TextColumn::make('customer.address')
                     ->label('Address')
                     ->html()
                     ->limit(50),
-                TextColumn::make('newOrder.lat_long')
+                TextColumn::make('customer.newOrder.lat_long')
                     ->label('Lat/Long')
                     ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('newOrder.fat.name')
+                TextColumn::make('customer.fat.name')
                     ->searchable()
                     ->sortable(),
-                TextColumn::make('newOrder.port.name')
+                TextColumn::make('customer.port.name')
                     ->searchable()
-                    ->sortable()
+                    ->sortable(),
+                TextInputColumn::make('customer.start_cable')
+                    ->label('Start Cable')
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //
