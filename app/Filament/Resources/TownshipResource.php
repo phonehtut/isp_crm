@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\FaultPointResource\Pages;
-use App\Filament\Resources\FaultPointResource\RelationManagers;
-use App\Models\FaultPoint;
+use App\Filament\Resources\TownshipResource\Pages;
+use App\Filament\Resources\TownshipResource\RelationManagers;
+use App\Models\Township;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -15,13 +15,11 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Tables\Columns\TextInputColumn;
 use Filament\Forms\Components\TextInput;
 
-class FaultPointResource extends Resource
+class TownshipResource extends Resource
 {
-    protected static ?string $model = FaultPoint::class;
+    protected static ?string $model = Township::class;
 
-    protected static ?string $navigationGroup = 'Maintenances';
-
-    protected static ?string $navigationIcon = 'heroicon-o-wrench';
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form
     {
@@ -63,9 +61,9 @@ class FaultPointResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListFaultPoints::route('/'),
-            // 'create' => Pages\CreateFaultPoint::route('/create'),
-            // 'edit' => Pages\EditFaultPoint::route('/{record}/edit'),
+            'index' => Pages\ListTownships::route('/'),
+            // 'create' => Pages\CreateTownship::route('/create'),
+            // 'edit' => Pages\EditTownship::route('/{record}/edit'),
         ];
     }
 }

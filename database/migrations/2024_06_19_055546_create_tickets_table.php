@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->longText('mainten_image');
+            $table->longText('install-image');
             $table->longText('reason')->nullable();
             $table->enum('priority', ["0","1","2","3"])->default('0')->comment('low , middle , high , ugent');
             $table->enum('status', ["0","1","2"])->default('0')->comment('open , resolved , close');

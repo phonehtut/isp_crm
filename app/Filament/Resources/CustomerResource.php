@@ -82,6 +82,7 @@ class CustomerResource extends Resource
                         RichEditor::make('address')
                             ->label('Address')
                             ->placeholder('Please Enterb Customer Address')
+                            ->required()
                             ->columnSpan('full'),
                     ])
                     ->collapsible()

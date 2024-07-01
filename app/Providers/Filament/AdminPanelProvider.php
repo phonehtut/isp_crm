@@ -65,6 +65,7 @@ class AdminPanelProvider extends PanelProvider
             ->globalSearch(false)
             ->sidebarCollapsibleOnDesktop()
             ->spa()
+            ->unsavedChangesAlerts()
             ->databaseTransactions()
             ->tenantBillingProvider(new SparkBillingProvider())
             ->userMenuItems([

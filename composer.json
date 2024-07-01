@@ -22,12 +22,12 @@
         "leandrocfe/filament-apex-charts": "^3.1",
         "livewire/livewire": "^3.5",
         "malzariey/filament-daterangepicker-filter": "^2.7",
+        "munafio/chatify": "^1.6",
         "owenvoke/blade-fontawesome": "^2.6",
         "parallax/filament-comments": "^1.3",
         "pxlrbt/filament-excel": "^2.3",
         "rupadana/filament-api-service": "^3.2",
-        "tomatophp/filament-browser": "^1.0",
-        "tomatophp/filament-translations": "^1.0"
+        "tomatophp/filament-browser": "^1.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",

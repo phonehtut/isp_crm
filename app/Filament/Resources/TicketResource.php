@@ -51,16 +51,19 @@ class TicketResource extends Resource
                         Select::make('customer_id')
                             ->relationship('customer', 'customer_id')
                             ->searchable()
-                            ->preload(),
+                            ->preload()
+                            ->required(),
                         Select::make('type_id')
                             ->relationship('type', 'name')
                             ->searchable()
-                            ->preload(),
+                            ->preload()
+                            ->required(),
                         Select::make('department_id')
                             ->label('Asgin To')
                             ->relationship('department','name')
                             ->searchable()
-                            ->preload(),
+                            ->preload()
+                            ->required(),
                     ])
                     ->columns(2)
                     ->collapsible(),
@@ -100,18 +103,21 @@ class TicketResource extends Resource
                                 '1' => 'middle',
                                 '2' => 'High',
                                 '3' => 'Urgent',
-                            ])->columns(1),
+                            ])->columns(1)
+                            ->required(),
                         Radio::make('status')
                             ->options([
                                 '0' => 'open',
                                 '1' => 'resolved',
                                 '2' => 'close',
-                            ])->columns(1),
+                            ])->columns(1)
+                            ->required(),
                     ])->columns(2),
                 Section::make('Reason')
                     ->schema([
                         Textarea::make('reason')
-                            ->hiddenLabel(),
+                            ->hiddenLabel()
+                            ->required(),
                      ])
              ]);
     }
@@ -158,6 +164,21 @@ class TicketResource extends Resource
                 TextInputColumn::make('customer.start_cable')
                     ->label('Start Cable')
                     ->toggleable(isToggledHiddenByDefault: true),
+                TextInputColumn::make('customer.end_cable')
+                    ->label('End Cable')
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextInputColumn::make('customer.total_cable')
+                    ->label('Total Cable')
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextInputColumn::make('customer.fat_optical')
+                    ->label('Fat OPtical')
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextInputColumn::make('customer.cus_res_optical')
+                    ->label('Customer Recive Optical')
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextInputColumn::make('customer.onu_optical')
+                    ->label('ONU Optical')
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //
@@ -192,35 +213,102 @@ class TicketResource extends Resource
             ->schema([
                 \Filament\Infolists\Components\Section::make('Detail Page')
                     ->schema([
-                        TextEntry::make('title'),
-                        TextEntry::make('customer.customer_id')
-                            ->label('Customer ID'),
-                        TextEntry::make('type.name')
-                            ->badge(),
-                        TextEntry::make('created_at')
-                            ->label('Issues date')
-                            ->date(),
-                        TextEntry::make('department.name')
-                            ->label('Asgin To')
-                            ->badge(),
-                        TextEntry::make('priority')
-                            ->formatStateUsing(fn(string $state): string => match ($state) {
-                                '0' => 'low',
-                                '1' => 'middle',
-                                '2' => 'High',
-                                '3' => 'Urgent',
-                            })
-                            ->badge()
-                            ->color(fn (string $state): string => match ($state) {
-                                '0' => 'success',
-                                '1' => 'primary',
-                                '2' => 'warning',
-                                '3' => 'danger',
-                                default => 'unknown',
-                            })
-
+                        \Filament\Infolists\Components\Section::make('Ticket Information')
+                            ->schema([
+                                TextEntry::make('id')
+                                    ->label('Ticket ID')
+                                    ->prefix('TKT'),
+                                TextEntry::make('title'),
+                                TextEntry::make('reason'),
+                                TextEntry::make('type.name')
+                                    ->badge(),
+                                TextEntry::make('created_at')
+                                    ->label('Issues date')
+                                    ->date(),
+                                TextEntry::make('department.name')
+                                    ->label('Asgin To')
+                                    ->badge(),
+                                TextEntry::make('priority')
+                                    ->formatStateUsing(fn(string $state): string => match ($state) {
+                                        '0' => 'low',
+                                        '1' => 'middle',
+                                        '2' => 'High',
+                                        '3' => 'Urgent',
+                                    })
+                                    ->badge()
+                                    ->color(fn (string $state): string => match ($state) {
+                                        '0' => 'success',
+                                        '1' => 'primary',
+                                        '2' => 'warning',
+                                        '3' => 'danger',
+                                        default => 'unknown',
+                                    }),
+                                TextEntry::make('user.name')
+                                    ->label('Created By'),
+                                TextEntry::make('lastUser.name')
+                                    ->label('Last Updated By')
+                            ])
+                            ->columns(3),
+                        \Filament\Infolists\Components\Section::make('Customer Information')
+                            ->schema([
+                                TextEntry::make('customer.customer_id')
+                                    ->label('Customer ID'),
+                                TextEntry::make('customer.register_date')
+                                    ->label('Register Date'),
+                                TextEntry::make('customer.name')
+                                    ->label('Customer Name'),
+                                TextEntry::make('customer.phone')
+                                    ->label('Customer Phone Number')
+                                    ->copyable()
+                                    ->copyMessage('phone number Copied'),
+                                TextEntry::make('customer.email')
+                                    ->label('Customer Email')
+                                    ->copyable()
+                                    ->copyMessage('Email Copied'),
+                                TextEntry::make('customer.address')
+                                    ->label('Address'),
+                                TextEntry::make('customer.plan.name')
+                                    ->label('Plan')
+                                    ->badge(),
+                                TextEntry::make('lat_long')
+                                    ->label('Lat/Long')
+                                    ->copyable()
+                                    ->copyMessage('Lat Long Copied'),
+                                TextEntry::make('customer.township.name')
+                                    ->label('Township')
+                            ])
+                            ->columns(3),
+                        \Filament\Infolists\Components\Section::make('Site Information')
+                            ->schema([
+                                TextEntry::make('customer.start_cable')
+                                    ->label('Start Cable')
+                                    ->suffix(' Meter'),
+                                TextEntry::make('customer.end_cable')
+                                    ->label('End Cable')
+                                    ->suffix(' Meter'),
+                                TextEntry::make('customer.total_cable')
+                                    ->label('Total Cable')
+                                    ->suffix(' Meter'),
+                                TextEntry::make('customer.fat_optical')
+                                    ->label('Fat Optical')
+                                    ->suffix(' Dbm'),
+                                TextEntry::make('customer.onu_optical')
+                                    ->label('ONU Optical')
+                                    ->suffix(' Dbm'),
+                                TextEntry::make('customer.cus_res_optical')
+                                    ->label('Customer Recive Optical')
+                                    ->suffix(' Dbm'),
+                                TextEntry::make('customer.fat.name')
+                                    ->label('Fat Box')
+                                    ->badge()
+                                    ->color('success'),
+                                TextEntry::make('customer.port.name')
+                                    ->label('Port')
+                                    ->badge()
+                                    ->color('info')
+                            ])
+                            ->columns(4),
                     ])
-                    ->columns(3)
             ]);
     }
 

@@ -12,8 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('tickets', function (Blueprint $table) {
-            $table->string('mainten_image')->nullable()->after('customer_id');
-            $table->string('install_image')->nullable()->after('mainten_image');
+            $table->unsignedBigInteger('created_by')->nullable()->after('status');
+            $table->foreign('created_by')->references('id')->on('users')->ondelete('cascade');
+            $table->unsignedBigInteger('updated_by')->nullable()->after('created_by');
+            $table->foreign('updated_by')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -23,8 +25,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('tickets', function (Blueprint $table) {
-            $table->dropColumn('mainten_image');
-            $table->dropColumn('install_image');
+            $table->dropForeign('created_by');
+            $table->dropColumn('created_by');
         });
     }
 };

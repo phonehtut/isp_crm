@@ -22,6 +22,8 @@ class Ticket extends Model
         'department_id',
         'priority',
         'status',
+        'created_by',
+        'updated_by'
     ];
 
     protected $casts = [
@@ -42,5 +44,15 @@ class Ticket extends Model
     public function department(): BelongsTo
     {
         return $this->belongsTo(Department::class, 'department_id');
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+
+    public function lastUser(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'updated_by');
     }
 }
