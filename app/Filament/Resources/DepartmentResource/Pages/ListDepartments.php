@@ -2,9 +2,10 @@
 
 namespace App\Filament\Resources\DepartmentResource\Pages;
 
-use App\Filament\Resources\DepartmentResource;
 use Filament\Actions;
+use Filament\Notifications\Notification;
 use Filament\Resources\Pages\ListRecords;
+use App\Filament\Resources\DepartmentResource;
 
 class ListDepartments extends ListRecords
 {

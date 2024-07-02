@@ -8,14 +8,9 @@ use Filament\Forms\Form;
 use App\Models\Department;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
-use Filament\Forms\Components\Select;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Forms\Components\TextInput;
-use Filament\Tables\Columns\ImageColumn;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\DepartmentResource\Pages;
-use App\Filament\Resources\DepartmentResource\RelationManagers;
+use App\Services\Components\Forms\DepartmentFormComponents;
+use App\Services\Components\Tables\DepartmentTableComponents;
 
 class DepartmentResource extends Resource
 {
@@ -29,14 +24,8 @@ class DepartmentResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('name')
-                    ->label('Department Name')
-                    ->placeholder('Please enter daperment name')
-                    ->required(),
-                Select::make('user_id')
-                    ->relationship('users', 'name')
-                    ->multiple()
-                    ->placeholder('Please Select User')
+                DepartmentFormComponents::departmentNameInput(),
+                DepartmentFormComponents::departmentUserSelect()
             ]);
     }
 
@@ -44,14 +33,8 @@ class DepartmentResource extends Resource
     {
         return $table
             ->columns([
-                ImageColumn::make('users.avatar_url')
-                    ->circular()
-                    ->stacked()
-                    ->limit(3),
-                TextColumn::make('name')
-                    ->searchable()
-                    ->sortable()
-                    ->badge()
+                DepartmentTableComponents::userAvatarColumn(),
+                DepartmentTableComponents::departmentNamColumn(),
             ])
             ->filters([
                 //

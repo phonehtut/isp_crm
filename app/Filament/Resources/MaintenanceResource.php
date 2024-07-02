@@ -2,8 +2,8 @@
 
 namespace App\Filament\Resources;
 
+use App\Services\Components\Forms\MaintenanceFormComponents;
 use Carbon\Carbon;
-use Filament\Forms;
 use Filament\Support\Enums\FontFamily;
 use Filament\Tables;
 use Filament\Forms\Form;
@@ -11,17 +11,10 @@ use Filament\Tables\Table;
 use App\Models\Maintenance;
 use Filament\Resources\Resource;
 use Filament\Support\Enums\MaxWidth;
-use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Section;
-use Filament\Forms\Components\Textarea;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Forms\Components\TextInput;
-use Illuminate\Database\Eloquent\Builder;
-use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Concerns\InteractsWithForms;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\MaintenanceResource\Pages;
-use App\Filament\Resources\MaintenanceResource\RelationManagers;
 
 class MaintenanceResource extends Resource
 {
@@ -39,93 +32,39 @@ class MaintenanceResource extends Resource
             ->schema([
                 Section::make('Maintenance Infomation')
                     ->schema([
-                        DateTimePicker::make('issues_at')
-                            ->native(false)
-                            ->seconds(false)
-                            ->placeholder('Select Issues Date')
-                            ->required()
-                            ->reactive()
-                            ->timezone('Asia/Yangon')
+                        MaintenanceFormComponents::maintainIssuesDate()
                             ->afterStateUpdated(fn ($state, callable $set, callable $get) => static::calculateDuration($set, $get('issues_at'), $get('finish_at'))),
-                        DateTimePicker::make('finish_at')
-                            ->native(false)
-                            ->seconds(false)
-                            ->reactive()
-                            ->timezone('Asia/Yangon')
+                        MaintenanceFormComponents::maintainFinishDate()
                             ->afterStateUpdated(fn ($state, callable $set, callable $get) => static::calculateDuration($set, $get('issues_at'), $get('finish_at'))),
-                        Select::make('ticket_id')
-                            ->relationship('ticket', 'id')
-                            ->searchable()
-                            ->preload()
-                            ->prefix('TKT'),
-                        Select::make('customer_id')
-                            ->relationship('customer', 'customer_id')
-                            ->searchable()
-                            ->preload(),
-                        Select::make('department_id')
-                            ->relationship('department', 'name')
-                            ->searchable()
-                            ->preload(),
-                        Select::make('status')
-                            ->options([
-                                '0' => 'pending',
-                                '1' => 'finish',
-                                '2' => 'Need To Check',
-                            ])
-                            ->searchable()
-                            ->preload(),
+                        MaintenanceFormComponents::maintainTicketSelect(),
+                        MaintenanceFormComponents::maintainCustomerSelect(),
+                        MaintenanceFormComponents::maintainAsginSelect(),
+                        MaintenanceFormComponents::maintainStatusSelect(),
                     ])
                     ->columns(2)
                     ->collapsible(),
                 Section::make('Remark')
                     ->schema([
-                        Textarea::make('cc_remark')
-                            ->label('Call Center Remark')
-                            ->placeholder('Please enter call center remark'),
-                        Textarea::make('noc_remark')
-                            ->label('Noc Remark')
-                            ->placeholder('Please enter NOC remark'),
+                        MaintenanceFormComponents::maintainCallCenterRemark(),
+                        MaintenanceFormComponents::maintainNocRemark(),
                     ])
                     ->columns(2)
                     ->collapsible(),
                 Section::make('Site Information')
                     ->schema([
-                        Select::make('site_engineer')
-                            ->options([
-                                '0' => 'Sub Com Team',
-                                '1' => 'Home Team',
-                            ])
-                            ->searchable()
-                            ->preload(),
-                        Select::make('fault_point_id')
-                            ->relationship('faultPoint', 'name')
-                            ->searchable()
-                            ->preload(),
-                        TextInput::make('duration')
-                            ->readOnly(),
-                        Textarea::make('issues')
-                            ->label('Issues Detail')
-                            ->placeholder('Please Enter Issues Detail')
-                            ->columnSpan('full'),
-                        TextInput::make('onu')
-                            ->label('ONU SN')
-                            ->placeholder('Please Enter ONU SN'),
-                        TextInput::make('adapter'),
-                        TextInput::make('drop_cable')
-                            ->label('Drop Cable')
-                            ->placeholder('Please Enter Drop Cable'),
-                        TextInput::make('patch_cord_apc')
-                            ->label('Patch Cord (APC)'),
-                        TextInput::make('patch_cord_upc')
-                            ->label('Patch Cord (UPC)'),
-                        TextInput::make('pigtail_apc')
-                            ->label('Pigtail (APC)'),
-                        TextInput::make('pigtail_upc')
-                            ->label('Pigtail (UPC)'),
-                        TextInput::make('sleeve')
-                            ->label('Sleeve'),
-                        TextInput::make('sleeve_closure')
-                            ->label('Sleeve Closure')
+                        MaintenanceFormComponents::maintainSiteEngineerSelect(),
+                        MaintenanceFormComponents::maintainFaultPointSelect(),
+                        MaintenanceFormComponents::maintainDuration(),
+                        MaintenanceFormComponents::maintainIssuesDetailInput(),
+                        MaintenanceFormComponents::maintainOnuInput(),
+                        MaintenanceFormComponents::maintainAdapterInput(),
+                        MaintenanceFormComponents::maintainDropCableInput(),
+                        MaintenanceFormComponents::maintainPatchCordApcInput(),
+                        MaintenanceFormComponents::maintainPatchCordUpcInput(),
+                        MaintenanceFormComponents::maintainPigtailApcInput(),
+                        MaintenanceFormComponents::maintainPigtailUpcInput(),
+                        MaintenanceFormComponents::maintainSleeveInput(),
+                        MaintenanceFormComponents::maintainSleeveClosureInput()
                     ])
                     ->columns(3)
                     ->collapsible(),
