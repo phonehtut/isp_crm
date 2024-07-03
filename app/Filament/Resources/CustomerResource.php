@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Services\Components\Forms\CustomerFormComponents;
 use Filament\Forms;
 use App\Models\Port;
 use Filament\Tables;
@@ -20,7 +21,6 @@ use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
 use Filament\Tables\Filters\SelectFilter;
-use Illuminate\Database\Eloquent\Builder;
 use Filament\Tables\Columns\TextInputColumn;
 use App\Filament\Resources\CustomerResource\Pages;
 use Malzariey\FilamentDaterangepickerFilter\Filters\DateRangeFilter;
@@ -38,134 +38,41 @@ class CustomerResource extends Resource
             ->schema([
                 Section::make('Customer Information')
                     ->schema([
-                        TextInput::make('customer_id')
-                            ->placeholder('Please Enter ID'),
-                        TextInput::make('name')
-                            ->label('Customer Name')
-                            ->required()
-                            ->placeholder('Please Enter Customer Name'),
-                        TextInput::make('email')
-                            ->label('Email')
-                            ->placeholder('Please Enter Customer Email'),
-                        TextInput::make('phone')
-                            ->label('Phone Number')
-                            ->placeholder('Please Enter Customer Phone Number')
-                            ->tel(),
+                        CustomerFormComponents::customerIdInput(),
+                        CustomerFormComponents::customerNameInput(),
+                        CustomerFormComponents::customerEmailInput(),
+                        CustomerFormComponents::customerPhoneInput(),
                         Section::make('NRC (Optical)')
                             ->schema([
-                                FileUpload::make('nrc_front')
-                                    ->hiddenLabel()
-                                    ->placeholder('Please Select NRC Front Photo')
-                                    ->directory(function (callable $get) {
-                                        $customerID = $get('customer_id');
-                                        return "customers/{$customerID}/nrc/front";
-                                    })
-                                    ->disk('public'),
-                                FileUpload::make('nrc_back')
-                                    ->hiddenLabel()
-                                    ->placeholder('Please Select NRC Back Photo')
-                                    ->directory(function (callable $get) {
-                                        $customerID = $get('customer_id');
-                                        return "customers/{$customerID}/nrc/back";
-                                    })
-                                    ->disk('public'),
+                                CustomerFormComponents::customerNrcFrontPhoto(),
+                                CustomerFormComponents::customerNrcBackPhoto(),
                             ])
                             ->collapsed()
                             ->columns(2),
-                        Select::make('township_id')
-                            ->relationship('township','name')
-                            ->searchable()
-                            ->preload(),
-                        TextInput::make('lat_long')
-                            ->label('Lat/Long')
-                            ->placeholder('Please Enter Customer Lat/Long'),
-                        RichEditor::make('address')
-                            ->label('Address')
-                            ->placeholder('Please Enterb Customer Address')
-                            ->required()
-                            ->columnSpan('full'),
+                        CustomerFormComponents::customerTownshipSelect(),
+                        CustomerFormComponents::customerLatlongInput(),
+                        CustomerFormComponents::customerAddressInput(),
                     ])
                     ->collapsible()
                     ->columns(2),
                 Section::make('Billing Information')
                     ->schema([
-                        DatePicker::make('register_date')
-                            ->native(false),
-                        Select::make('plan_id')
-                            ->relationship('plan','name')
-                            ->searchable()
-                            ->preload()
+                        CustomerFormComponents::customerRegisterDate(),
+                        CustomerFormComponents::customerPlanSelect()
                     ])
                     ->collapsible()
                     ->columns(2),
                 Section::make('Site Information')
                     ->schema([
-                        Select::make('fat_id')
-                            ->relationship('fat', 'name')
-                            ->reactive()
-                            ->searchable()
-                            ->preload()
-                            ->afterStateUpdated(fn ($state, callable $set) => $set('port_id', null))
-                            ->columnSpan(2),
-                        Select::make('port_id')
-                            ->relationship('port', 'name')
-                            ->options(function (callable $get) {
-                                $fatId = $get('fat_id');
-
-                                if (!$fatId) {
-                                    return [];
-                                }
-
-                                return Port::whereHas('fat_boxes', function ($query) use ($fatId) {
-                                    $query->where('fat_id', $fatId);
-                                })->pluck('name', 'id');
-                            })
-                            ->required()
-                            ->searchable()
-                            ->preload()
-                            ->columnSpan(1),
-                        TextInput::make('start_cable')
-                            ->label('Cable Start')
-                            ->suffix('meter')
-                            ->reactive()
-                            ->afterStateUpdated(function ($state, callable $set, $get) {
-                                $endCable = $get('end_cable');
-                                if (is_numeric($state) && is_numeric($endCable)) {
-                                    $set('total_cable', $state - $endCable);
-                                } else {
-                                    $set('total_cable', 'start cable or end cable is not integer');
-                                }
-                            }),
-                        TextInput::make('end_cable')
-                            ->label('Cable End')
-                            ->suffix('meter')
-                            ->reactive()
-                            ->afterStateUpdated(function ($state, callable $set, $get) {
-                                $startCable = $get('start_cable');
-                                if (is_numeric($state) && is_numeric($startCable)) {
-                                    $set('total_cable', $startCable - $state);
-                                } else {
-                                    $set('total_cable', 'start cable or end cable is not integer');
-                                }
-                            }),
-                        TextInput::make('total_cable')
-                            ->label('Total Cable')
-                            ->suffix('meter')
-                            ->readOnly()
-                            ->label('Total Cable')
-                            ->suffix('meter'),
-                        TextInput::make('fat_optical')
-                            ->label('FAT Optical')
-                            ->suffix('dbm'),
-                        TextInput::make('cus_res_optical')
-                            ->label('Customer Recive Optical')
-                            ->suffix('dbm'),
-                        TextInput::make('onu_optical')
-                            ->label('Onu Optical')
-                            ->suffix('dbm'),
-                        TextInput::make('sn')
-                            ->required()
-                            ->columnSpan('full'),
+                        CustomerFormComponents::customerFatSelect(),
+                        CustomerFormComponents::customerPortSelect(),
+                        CustomerFormComponents::customerStartCableInput(),
+                        CustomerFormComponents::customerEndCableInput(),
+                        CustomerFormComponents::customerTotalCableInput(),
+                        CustomerFormComponents::customerFatOpticalInput(),
+                        CustomerFormComponents::customerCusResOpticalInput(),
+                        CustomerFormComponents::customerOnuOpticalInput(),
+                        CustomerFormComponents::customerSnInput(),
                     ])
                     ->collapsible()
                     ->columns(3),

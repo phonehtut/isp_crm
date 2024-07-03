@@ -4,22 +4,16 @@ namespace App\Providers\Filament;
 
 use Filament\Pages;
 use Filament\Panel;
-use Filament\Widgets;
 use Filament\PanelProvider;
 use Filament\Navigation\MenuItem;
-use Awcodes\Curator\CuratorPlugin;
 use Filament\Support\Colors\Color;
 use Hasnayeen\Themes\ThemesPlugin;
 use App\Filament\Clusters\Settings;
-use App\Providers\MyVersionProvider;
 use Filament\Support\Enums\MaxWidth;
 use Filament\Navigation\NavigationGroup;
-use Rupadana\ApiService\ApiServicePlugin;
 use Filament\Http\Middleware\Authenticate;
 use Awcodes\FilamentVersions\VersionsPlugin;
-use Awcodes\FilamentVersions\VersionsWidget;
 use Hasnayeen\Themes\Http\Middleware\SetTheme;
-use App\Filament\Resources\MaintenanceResource;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Awcodes\FilamentQuickCreate\QuickCreatePlugin;
@@ -36,10 +30,7 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Leandrocfe\FilamentApexCharts\FilamentApexChartsPlugin;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Joaopaulolndev\FilamentEditProfile\Pages\EditProfilePage;
-use TomatoPHP\FilamentMediaManager\FilamentMediaManagerPlugin;
-use TomatoPHP\FilamentTranslations\FilamentTranslationsPlugin;
 use Joaopaulolndev\FilamentEditProfile\FilamentEditProfilePlugin;
-use Joaopaulolndev\FilamentCheckSslWidget\FilamentCheckSslWidgetPlugin;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -73,6 +64,11 @@ class AdminPanelProvider extends PanelProvider
                     ->label(fn() => auth()->user()->name)
                     ->url(fn (): string => EditProfilePage::getUrl())
                     ->icon('heroicon-m-user-circle'),
+                'Chat' => MenuItem::make()
+                    ->label('Chat')
+                    ->url('/chat')
+                    ->icon('heroicon-o-chat-bubble-oval-left-ellipsis')
+                    ->openUrlInNewTab(true)
             ])
             ->NavigationGroups([
                 NavigationGroup::make('Ticket Settings'),
