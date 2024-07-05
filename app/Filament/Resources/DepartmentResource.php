@@ -66,3 +66,4 @@ class DepartmentResource extends Resource
         ];
     }
 }
+

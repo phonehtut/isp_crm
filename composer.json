@@ -18,6 +18,8 @@
         "joaopaulolndev/filament-edit-profile": "^1.0",
         "josespinal/filament-record-navigation": "^2.0",
         "laravel/framework": "^11.9",
+        "laravel/prompts": "^0.1.24",
+        "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
         "leandrocfe/filament-apex-charts": "^3.1",
         "livewire/livewire": "^3.5",
@@ -30,6 +32,7 @@
         "tomatophp/filament-browser": "^1.0"
     },
     "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.13",
         "fakerphp/faker": "^1.23",
         "laravel/pint": "^1.13",
         "laravel/sail": "^1.26",

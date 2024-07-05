@@ -8,8 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class FaultPoint extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = [
-        'name',    
+        'name',
+        'remark'
     ];
 }

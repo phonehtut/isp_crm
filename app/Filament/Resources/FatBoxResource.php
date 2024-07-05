@@ -2,19 +2,14 @@
 
 namespace App\Filament\Resources;
 
-use Filament\Forms;
+use App\Services\Components\Forms\FatBoxFormComponents;
+use App\Services\Components\Tables\FatBoxTableComponents;
 use Filament\Tables;
 use App\Models\FatBox;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
-use Filament\Forms\Components\Select;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Forms\Components\TextInput;
-use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\FatBoxResource\Pages;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Filament\Resources\FatBoxResource\RelationManagers;
 
 class FatBoxResource extends Resource
 {
@@ -28,12 +23,8 @@ class FatBoxResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('name'),
-                Select::make('port_id')
-                    ->relationship('ports', 'name')
-                    ->multiple()
-                    ->searchable()
-                    ->preload()
+                FatBoxFormComponents::fatNameInput(),
+                FatBoxFormComponents::fatPortSelect()
             ]);
     }
 
@@ -41,10 +32,8 @@ class FatBoxResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name')
-                    ->label('Box Name'),
-                TextColumn::make('ports.name')
-                    ->badge()
+                FatBoxTableComponents::fatNameColumn(),
+                FatBoxTableComponents::fatPortColumn()
             ])
             ->filters([
                 //
@@ -70,8 +59,8 @@ class FatBoxResource extends Resource
     {
         return [
             'index' => Pages\ListFatBoxes::route('/'),
-            'create' => Pages\CreateFatBox::route('/create'),
-            'edit' => Pages\EditFatBox::route('/{record}/edit'),
+            // 'create' => Pages\CreateFatBox::route('/create'),
+            // 'edit' => Pages\EditFatBox::route('/{record}/edit'),
         ];
     }
 }

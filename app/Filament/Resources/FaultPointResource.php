@@ -3,15 +3,13 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\FaultPointResource\Pages;
-use App\Filament\Resources\FaultPointResource\RelationManagers;
 use App\Models\FaultPoint;
-use Filament\Forms;
+use App\Services\Components\Forms\FaultPointFormComponents;
+use App\Services\Components\Tables\FaultPointTableComponents;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Tables\Columns\TextInputColumn;
 use Filament\Forms\Components\TextInput;
 
@@ -27,8 +25,8 @@ class FaultPointResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('name')
-                    ->required()
+                FaultPointFormComponents::faultpointNameInput(),
+                FaultPointFormComponents::faultpointRemarkInput()
             ]);
     }
 
@@ -36,9 +34,8 @@ class FaultPointResource extends Resource
     {
         return $table
             ->columns([
-                TextInputColumn::make('name')
-                    ->searchable()
-                    ->sortable()
+                FaultPointTableComponents::faultpointNameColumn(),
+                FaultPointTableComponents::faultpointRemarkColumn()
             ])
             ->filters([
                 //

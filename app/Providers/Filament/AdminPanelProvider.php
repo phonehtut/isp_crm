@@ -11,6 +11,7 @@ use Hasnayeen\Themes\ThemesPlugin;
 use App\Filament\Clusters\Settings;
 use Filament\Support\Enums\MaxWidth;
 use Filament\Navigation\NavigationGroup;
+use Rupadana\ApiService\ApiServicePlugin;
 use Filament\Http\Middleware\Authenticate;
 use Awcodes\FilamentVersions\VersionsPlugin;
 use Hasnayeen\Themes\Http\Middleware\SetTheme;
@@ -52,6 +53,7 @@ class AdminPanelProvider extends PanelProvider
                 'gray' => Color::Gray,
                 'white' => Color::Slate,
             ])
+            ->topbar(true)
             ->maxContentWidth(MaxWidth::Full)
             ->globalSearch(false)
             ->sidebarCollapsibleOnDesktop()
@@ -122,6 +124,7 @@ class AdminPanelProvider extends PanelProvider
                     ->navigationSort(1)
                     ->slug('env-editor'),
                 FilamentShieldPlugin::make(),
+                ApiServicePlugin::make()
             ]);
     }
 }
