@@ -19,6 +19,7 @@ use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Awcodes\FilamentQuickCreate\QuickCreatePlugin;
 use Filament\Billing\Providers\SparkBillingProvider;
+use Guava\FilamentKnowledgeBase\KnowledgeBasePlugin;
 use TomatoPHP\FilamentBrowser\FilamentBrowserPlugin;
 use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 use GeoSot\FilamentEnvEditor\FilamentEnvEditorPlugin;
@@ -124,7 +125,7 @@ class AdminPanelProvider extends PanelProvider
                     ->navigationSort(1)
                     ->slug('env-editor'),
                 FilamentShieldPlugin::make(),
-                ApiServicePlugin::make()
+                ApiServicePlugin::make(),
             ]);
     }
 }

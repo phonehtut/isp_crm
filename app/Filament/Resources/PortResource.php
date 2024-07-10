@@ -11,10 +11,9 @@ use Filament\Resources\Resource;
 use Filament\Forms\Components\Select;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
-use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\PortResource\Pages;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Filament\Resources\PortResource\RelationManagers;
+use App\Services\Components\Forms\PortFormComponents;
+use App\Services\Components\Tables\PortTableComponents;
 
 class PortResource extends Resource
 {
@@ -28,8 +27,7 @@ class PortResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('name')
-                    ->required(),
+                PortFormComponents::portNameInput(),
                 Select::make('fat_id')
                     ->relationship('fat_boxes', 'name')
             ]);
@@ -39,9 +37,8 @@ class PortResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name'),
-                TextColumn::make('fat_boxes.name')
-                    ->badge()
+                PortTableComponents::portNameColumn(),
+                PortTableComponents::portFatColumn()
             ])
             ->filters([
                 //
@@ -67,8 +64,8 @@ class PortResource extends Resource
     {
         return [
             'index' => Pages\ListPorts::route('/'),
-            'create' => Pages\CreatePort::route('/create'),
-            'edit' => Pages\EditPort::route('/{record}/edit'),
+            // 'create' => Pages\CreatePort::route('/create'),
+            // 'edit' => Pages\EditPort::route('/{record}/edit'),
         ];
     }
 }

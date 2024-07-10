@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources;
 
-use Filament\Forms;
 use App\Models\Plan;
 use Filament\Tables;
 use Filament\Forms\Form;
@@ -10,10 +9,9 @@ use Filament\Tables\Columns\TextInputColumn;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\TextInput;
-use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\PlanResource\Pages;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Filament\Resources\PlanResource\RelationManagers;
+use App\Services\Components\Forms\PlanFormComponents;
+use App\Services\Components\Tables\PlanTableComponents;
 
 class PlanResource extends Resource
 {
@@ -25,10 +23,7 @@ class PlanResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('name')
-                    ->label('Plan Name')
-                    ->required()
-                    ->columnSpan('full'),
+                PlanFormComponents::planNameInput(),
             ]);
     }
 
@@ -36,10 +31,7 @@ class PlanResource extends Resource
     {
         return $table
             ->columns([
-                TextInputColumn::make('name')
-                    ->label('Plan Name')
-                    ->searchable()
-                    ->sortable(),
+                PlanTableComponents::planNameColumn(),
             ])
             ->filters([
                 //

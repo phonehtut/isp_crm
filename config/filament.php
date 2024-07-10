@@ -31,6 +31,16 @@ return [
 
     ],
 
+    'middleware' => [
+        'auth' => [
+            // 'auth:web',
+            'check.license',
+        ],
+        'base' => [
+            'web',
+        ],
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Default Filesystem Disk
